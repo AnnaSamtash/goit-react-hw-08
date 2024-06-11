@@ -1,0 +1,14 @@
+.contactlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+
+.contactlist_item {
+    border: 1px solid black;
+    border-radius: 3px;
+    flex-basis: calc((100% - 24px) / 3);
+    background-color: beige;
+    padding: 12px;
+}
