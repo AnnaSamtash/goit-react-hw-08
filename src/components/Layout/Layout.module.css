@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 16px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 16px;
     background-color: rgb(92, 145, 213);
+    height: 100%;
 }

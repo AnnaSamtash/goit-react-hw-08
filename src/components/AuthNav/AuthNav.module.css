@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    gap: var(--gap);
+}
+
+
+.link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px;
+    font-weight: var(--font-weight-medium);
+    font-size: 1.5rem;
+}
+
+.active {
+    color: var(--accent-color);
+}

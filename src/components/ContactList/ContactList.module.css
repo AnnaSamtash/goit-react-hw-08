@@ -5,10 +5,25 @@
     width: 100%;
 }
 
+.title {
+    font-size: 2rem;
+    margin-bottom: var(--margin-bottom-l);
+}
+
 .contactlist_item {
-    border: 1px solid black;
+    border: 1px solid var(--main-black-colo);
     border-radius: 3px;
     flex-basis: calc((100% - 24px) / 3);
-    background-color: beige;
+    background-color: var(--background-form);
     padding: 12px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .contactlist_item {
+        border: 1px solid var(--main-black-colo);
+        border-radius: 3px;
+        flex-basis: calc((100% - 12px) / 2);
+        background-color: var(--background-form);
+        padding: 6px;
+    }
 }
