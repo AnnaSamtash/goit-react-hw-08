@@ -1,27 +1,45 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectNameFilter } from '../../redux/filters/selectors.js';
+import { selectFilters } from '../../redux/filters/selectors.js';
 import css from './SearchBox.module.css';
 import { useId } from 'react';
-import { setFilter } from '../../redux/filters/slice.js';
+import { setFilters } from '../../redux/filters/slice.js';
 
 export default function SearchBox() {
   const dispatch = useDispatch();
-  const filter = useSelector(selectNameFilter);
-  const id = useId();
-  const handleFilterChange = filter => dispatch(setFilter(filter));
+  const filters = useSelector(selectFilters);
+  const nameId = useId();
+  const numberId = useId();
+  const handleFilterChange = newFilters => dispatch(setFilters(newFilters));
 
   return (
-    <div className={css.searchBox_container}>
-      <label htmlFor={id} className={css.searchBox_title}>
-        Find contacts by name
-      </label>
-      <input
-        className={css.searchBox_input}
-        type="text"
-        id={id}
-        value={filter}
-        onChange={e => handleFilterChange(e.target.value)}
-      />
+    <div className={css.container}>
+      <h2 className={css.title}>Find contact</h2>
+      <div className={css.searchBox_container}>
+        <div className={css.input_container}>
+          <label htmlFor={nameId} className={css.searchBox_title}>
+            By name
+          </label>
+          <input
+            className={css.searchBox_input}
+            type="text"
+            id={nameId}
+            value={filters.name}
+            onChange={e => handleFilterChange({ name: e.target.value })}
+          />
+        </div>
+        <div className={css.form_input_container}>
+          <label htmlFor={numberId} className={css.searchBox_title}>
+            By number
+          </label>
+          <input
+            className={css.searchBox_input}
+            type="tel"
+            id={numberId}
+            value={filters.number}
+            onChange={e => handleFilterChange({ number: e.target.value })}
+          />
+        </div>
+      </div>
     </div>
   );
 }

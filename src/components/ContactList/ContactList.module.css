@@ -18,12 +18,20 @@
     padding: 12px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (min-width: 320px) and (max-width: 950px) {
     .contactlist_item {
-        border: 1px solid var(--main-black-colo);
-        border-radius: 3px;
         flex-basis: calc((100% - 12px) / 2);
-        background-color: var(--background-form);
         padding: 6px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+    .contactlist_item {
+        flex-basis: 90%;
+        padding: 6px;
+    }
+
+    .contactlist {
+        justify-content: center;
     }
 }

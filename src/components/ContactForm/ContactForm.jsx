@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
 export default function ContactForm() {
-  const phoneRegExp = /^\d{3}-\d{3}-\d{4}$/;
+  const phoneRegExp = /^\d{3}-\d{2}-\d{2}$/;
   const ContactFormSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Too Short!')
@@ -36,6 +36,7 @@ export default function ContactForm() {
           number: values.number,
         };
         dispatch(addContact(newContact))
+          .unwrap()
           .then(() => {
             toast.success('Contact added!');
           })

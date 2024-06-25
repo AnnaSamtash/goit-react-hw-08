@@ -9,12 +9,12 @@
     background-color: var(--btn-color);
     color: inherit;
     box-shadow: 10px 10px 8px 2px var(--dark-grey-color);
-    transition: color, background-color var(--transition-timing-function);
+    transition: color var(--transition-timing-function);
 }
 
 
-.btn:hover .btn:focus {
-    background-color: var(--btn-hover);
+.btn:hover,
+.btn:focus {
     color: var(--white-color);
 }
 
