@@ -3,21 +3,26 @@ import { createSlice } from '@reduxjs/toolkit';
 const modalsSlice = createSlice({
   name: 'modals',
   initialState: {
-    ConfirmDialogIsOpen: false,
-    FormDialogIsOpen: false,
+    confirmDialogIsOpen: false,
+    formDialogIsOpen: false,
+    contact: { id: '', name: '', number: '' },
   },
   reducers: {
-    openConfirmDialog(state) {
-      state.ConfirmDialogIsOpen = true;
+    openConfirmDialog(state, action) {
+      state.confirmDialogIsOpen = true;
+      state.contact = action.payload;
     },
     closeConfirmDialog(state) {
-      state.ConfirmDialogIsOpen = false;
+      state.confirmDialogIsOpen = false;
+      state.contact = { id: '', name: '', number: '' };
     },
-    openFormDialogIsOpen(state) {
-      state.FormDialogIsOpen = true;
+    openFormDialogIsOpen(state, action) {
+      state.formDialogIsOpen = true;
+      state.contact = action.payload;
     },
     closeFormDialogIsOpen(state) {
-      state.FormDialogIsOpen = false;
+      state.formDialogIsOpen = false;
+      state.contact = { id: '', name: '', number: '' };
     },
   },
 });

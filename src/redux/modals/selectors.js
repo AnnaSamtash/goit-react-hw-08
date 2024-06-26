@@ -1,3 +1,4 @@
 export const selectConfirmDialogIsOpen = state =>
-  state.modals.ConfirmDialogIsOpen;
-export const selectFormDialogIsOpen = state => state.modals.FormDialogIsOpen;
+  state.modals.confirmDialogIsOpen;
+export const selectFormDialogIsOpen = state => state.modals.formDialogIsOpen;
+export const selectContactFromModal = state => state.modals.contact;

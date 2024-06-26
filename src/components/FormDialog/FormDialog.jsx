@@ -6,14 +6,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFormDialogIsOpen } from '../../redux/modals/selectors';
+import {
+  selectContactFromModal,
+  selectFormDialogIsOpen,
+} from '../../redux/modals/selectors';
 import { fixContact } from '../../redux/contacts/operations';
 import { closeFormDialogIsOpen } from '../../redux/modals/slice';
 import toast from 'react-hot-toast';
 
-export default function FormDialog({ name, number, id }) {
-  const modalFormOpen = useSelector(selectFormDialogIsOpen);
+export default function FormDialog() {
   const dispatch = useDispatch();
+  const modalFormOpen = useSelector(selectFormDialogIsOpen);
+  const modalContact = useSelector(selectContactFromModal);
 
   const handleClose = () => dispatch(closeFormDialogIsOpen());
   const handleFix = info => {
@@ -38,7 +42,7 @@ export default function FormDialog({ name, number, id }) {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries(formData.entries());
-          formJson.id = id;
+          formJson.id = modalContact.id;
           handleFix(formJson);
         },
       }}
@@ -61,7 +65,7 @@ export default function FormDialog({ name, number, id }) {
           type="text"
           fullWidth
           variant="standard"
-          defaultValue={name}
+          defaultValue={modalContact.name}
         />
         <TextField
           required
@@ -74,7 +78,7 @@ export default function FormDialog({ name, number, id }) {
           }}
           type="tel"
           fullWidth
-          defaultValue={number}
+          defaultValue={modalContact.number}
           variant="standard"
         />
       </DialogContent>

@@ -24,7 +24,7 @@ strong {
 }
 
 .link {
-    color: var(--btn-active);
+    color: var(--link);
     font-size: 1.5rem;
     text-decoration: underline;
 }

@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import { Toaster } from 'react-hot-toast';
+import ConfirmDialog from './components/ConfirmDialog copy/ConfirmDialog.jsx';
+import FormDialog from './components/FormDialog/FormDialog.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const RegistrationPage = lazy(() =>
@@ -71,6 +73,8 @@ const App = () => {
         </Routes>
       </Suspense>
       <Toaster position="top-center" toastOptions={{ duration: 6000 }} />
+      <ConfirmDialog />
+      <FormDialog />
     </div>
   );
 };

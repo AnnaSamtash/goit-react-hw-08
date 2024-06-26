@@ -8,7 +8,10 @@ import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectConfirmDialogIsOpen } from '../../redux/modals/selectors';
+import {
+  selectConfirmDialogIsOpen,
+  selectContactFromModal,
+} from '../../redux/modals/selectors';
 import { closeConfirmDialog } from '../../redux/modals/slice';
 import { deleteContact } from '../../redux/contacts/operations';
 import toast from 'react-hot-toast';
@@ -24,13 +27,14 @@ function PaperComponent(props) {
   );
 }
 
-const ConfirmDialog = ({ name, id }) => {
-  const modalOpen = useSelector(selectConfirmDialogIsOpen);
+const ConfirmDialog = () => {
   const dispatch = useDispatch();
+  const modalOpen = useSelector(selectConfirmDialogIsOpen);
+  const modalContact = useSelector(selectContactFromModal);
 
   const handleClose = () => dispatch(closeConfirmDialog());
   const handleDelete = () => {
-    dispatch(deleteContact(id))
+    dispatch(deleteContact(modalContact.id))
       .unwrap()
       .then(() => {
         handleClose();

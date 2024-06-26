@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import Button from '../Button/Button';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaPencilAlt } from 'react-icons/fa';
-import ConfirmDialog from '../ConfirmDialog copy/ConfirmDialog';
-import FormDialog from '../FormDialog/FormDialog';
 import {
   openConfirmDialog,
   openFormDialogIsOpen,
@@ -30,20 +28,18 @@ export default function Contact({ name, number, id }) {
         </div>
         <div className={css.btn_container}>
           <Button
-            onClick={() => dispatch(openFormDialogIsOpen())}
+            onClick={() => dispatch(openFormDialogIsOpen({ name, number, id }))}
             style={{ margin: 0, backgroundColor: '#36d836cd' }}
           >
             <FaPencilAlt size={32} />
           </Button>
           <Button
-            onClick={() => dispatch(openConfirmDialog())}
+            onClick={() => dispatch(openConfirmDialog({ name, number, id }))}
             style={{ margin: 0 }}
           >
             <MdDeleteForever size={32} />
           </Button>
         </div>
-        <ConfirmDialog id={id} name={name} />
-        <FormDialog name={name} number={number} id={id} />
       </div>
     </div>
   );
