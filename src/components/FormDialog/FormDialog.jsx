@@ -5,19 +5,33 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFormDialogIsOpen } from '../../redux/modals/selectors';
+import { fixContact } from '../../redux/contacts/operations';
+import { closeFormDialogIsOpen } from '../../redux/modals/slice';
+import toast from 'react-hot-toast';
 
-export default function FormDialog({
-  open,
-  onClose,
-  onSubmit,
-  name,
-  number,
-  id,
-}) {
+export default function FormDialog({ name, number, id }) {
+  const modalFormOpen = useSelector(selectFormDialogIsOpen);
+  const dispatch = useDispatch();
+
+  const handleClose = () => dispatch(closeFormDialogIsOpen());
+  const handleFix = info => {
+    dispatch(fixContact(info))
+      .unwrap()
+      .then(() => {
+        handleClose();
+        toast.success('Contact fixed!');
+      })
+      .catch(() => {
+        toast.error('Contact not fixed!! Please try again!');
+      });
+  };
+
   return (
     <Dialog
-      open={open}
-      onClose={onClose}
+      open={modalFormOpen}
+      onClose={handleClose}
       PaperProps={{
         component: 'form',
         onSubmit: event => {
@@ -25,7 +39,7 @@ export default function FormDialog({
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries(formData.entries());
           formJson.id = id;
-          onSubmit(formJson);
+          handleFix(formJson);
         },
       }}
     >
@@ -65,7 +79,7 @@ export default function FormDialog({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={handleClose}>Cancel</Button>
         <Button type="submit">Fix</Button>
       </DialogActions>
     </Dialog>

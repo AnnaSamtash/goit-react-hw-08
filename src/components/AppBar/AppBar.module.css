@@ -3,6 +3,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--margin-bottom-l);
-    border-bottom: 1px solid var(--dark-grey-color);
+    border-bottom: 3px solid var(--dark-grey-color);
     padding: var(--padding-main);
 }

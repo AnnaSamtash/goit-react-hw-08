@@ -7,6 +7,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import Stack from '@mui/material/Stack';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectConfirmDialogIsOpen } from '../../redux/modals/selectors';
+import { closeConfirmDialog } from '../../redux/modals/slice';
+import { deleteContact } from '../../redux/contacts/operations';
+import toast from 'react-hot-toast';
 
 function PaperComponent(props) {
   return (
@@ -19,11 +24,27 @@ function PaperComponent(props) {
   );
 }
 
-const ConfirmDialog = ({ open, onClose, onConfirm, name, id }) => {
+const ConfirmDialog = ({ name, id }) => {
+  const modalOpen = useSelector(selectConfirmDialogIsOpen);
+  const dispatch = useDispatch();
+
+  const handleClose = () => dispatch(closeConfirmDialog());
+  const handleDelete = () => {
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        handleClose();
+        toast.success('Contact deleted!');
+      })
+      .catch(() => {
+        toast.error('Contact not deleted!! Please try again!');
+      });
+  };
+
   return (
     <Dialog
-      open={open}
-      onClose={onClose}
+      open={modalOpen}
+      onClose={handleClose}
       PaperComponent={PaperComponent}
       aria-labelledby="draggable-dialog-title"
     >
@@ -37,10 +58,10 @@ const ConfirmDialog = ({ open, onClose, onConfirm, name, id }) => {
       </DialogContent>
       <DialogActions>
         <Stack direction="row" spacing={2}>
-          <Button autoFocus onClick={onClose} color="success">
+          <Button autoFocus onClick={handleClose} color="success">
             Undo
           </Button>
-          <Button onClick={() => onConfirm(id)} color="error">
+          <Button onClick={handleDelete} color="error">
             Delete
           </Button>
         </Stack>
