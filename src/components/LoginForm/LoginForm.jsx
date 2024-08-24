@@ -12,12 +12,6 @@ export default function LoginForm() {
     email: Yup.string().email('Must be a valid email!').required('Required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase char')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase char')
-      .matches(
-        /[a-zA-Z]+[^a-zA-Z\s]+/,
-        'at least 1 number or special char (@,!,#, etc).'
-      )
       .required('Required'),
   });
 

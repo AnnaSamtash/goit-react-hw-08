@@ -5,6 +5,7 @@
     font-weight: var(--font-weight-bold);
     font-size: 2rem;
     flex-shrink: 1;
+    outline: transparent;
 }
 
 .active {
